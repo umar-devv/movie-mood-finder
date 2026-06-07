@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Mood Finder</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <div class="container">
+        <header>
+            <span class="portfolio-badge">Umar's Interactive Showcase</span>
+            <h1>Movie Mood Finder</h1>
+            <p>Select your current state of mind and let the system recommend your next unforgettable cinematic journey.</p>
+        </header>
+
+        <div class="controls-wrapper">
+            <div class="mood-selector" id="mood-selector" role="group" aria-label="Filter movies by mood">
+                <button class="mood-btn active reset-btn" data-mood="All">
+                    <span>✨</span> Show All
+                </button>
+                <button class="mood-btn" data-mood="Sad">
+                    <span>😢</span> Sad
+                </button>
+                <button class="mood-btn" data-mood="Motivational">
+                    <span>⚡</span> Motivational
+                </button>
+                <button class="mood-btn" data-mood="Dark">
+                    <span>🌌</span> Dark
+                </button>
+                <button class="mood-btn" data-mood="Mind-blowing">
+                    <span>🧠</span> Mind-blowing
+                </button>
+            </div>
+            <div class="status-bar" id="status-bar">
+            </div>
+        </div>
+        <main class="grid-container" id="movie-grid"></main>
+    </div>
+
+    <footer>
+        &copy; 2026 Umar. Designed & Crafted with Passion. All rights reserved.
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

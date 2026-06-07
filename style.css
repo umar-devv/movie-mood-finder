@@ -1,0 +1,320 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a0a1a; 
+    color: white;
+    min-height: 100vh;
+    padding: 60px 20px 80px 20px;
+}
+
+.ambient-glow-1 {
+    position: fixed;
+    top: 20%;
+    left: 15%;
+    width: 350px;
+    height: 350px;
+    background: hotpink;
+    filter: blur(100px);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.ambient-glow-2 {
+    position: fixed;
+    bottom: 20%;
+    right: 15%;
+    width: 400px;
+    height: 400px;
+    background: cyan;
+    filter: blur(120px);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.portfolio-badge {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid cyan;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 20px;
+    color: cyan;
+}
+
+h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: white;
+}
+
+header p {
+    color: lightgray;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.controls-wrapper {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.mood-selector {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.mood-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    background: #1a1a2e;
+    border: 1px solid #333;
+    padding: 12px 24px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.mood-btn:hover {
+    background: #2a2a3e;
+    transform: translateY(-3px);
+    border-color: cyan;
+}
+
+.mood-btn.active[data-mood="All"] {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+.mood-btn.active[data-mood="Sad"] {
+    background: cyan;
+    color: black;
+    border-color: cyan;
+}
+
+.mood-btn.active[data-mood="Motivational"] {
+    background: hotpink;
+    color: white;
+    border-color: hotpink;
+}
+
+.mood-btn.active[data-mood="Dark"] {
+    background: purple;
+    color: white;
+    border-color: purple;
+}
+
+.mood-btn.active[data-mood="Mind-blowing"] {
+    background: limegreen;
+    color: black;
+    border-color: limegreen;
+}
+
+.status-bar {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: lightgray;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+.card {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 18px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+    .card {
+        width: calc(25% - 21px);
+    }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    .card {
+        width: calc(50% - 14px);
+    }
+}
+
+@media (max-width: 639px) {
+    .card {
+        width: 100%;
+    }
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    background: #22223b;
+    border-color: cyan;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.card-header {
+    margin-bottom: 16px;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.year-badge {
+    font-family: 'JetBrains Mono', monospace;
+    background: #0a0a1a;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: cyan;
+}
+
+.mood-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.mood-chip {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: #0a0a1a;
+    color: lightgray;
+}
+
+.card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: white;
+}
+
+.card-description {
+    font-size: 14px;
+    color: lightgray;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #333;
+    padding-top: 16px;
+}
+
+.rating {
+    color: gold;
+    font-size: 18px;
+}
+
+.empty-star {
+    color: #444;
+}
+
+.view-details {
+    font-size: 12px;
+    font-weight: 500;
+    color: cyan;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.view-details:hover {
+    color: hotpink;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 40px;
+    background: #1a1a2e;
+    border: 1px dashed cyan;
+    border-radius: 18px;
+    width: 100%;
+}
+
+.empty-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+}
+
+.empty-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.empty-text {
+    color: lightgray;
+}
+
+footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid #333;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: lightgray;
+}
+
+footer a {
+    color: #666;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: hotpink;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
