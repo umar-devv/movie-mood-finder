@@ -78,7 +78,7 @@ body.theme-cyberpunk {
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--theme-bg); 
+    background: var(--theme-bg);
     color: var(--theme-text-primary);
     min-height: 100vh;
     padding: 60px 20px 80px 20px;
@@ -493,7 +493,7 @@ header p {
 .half-star {
     position: relative;
     display: inline-block;
-    color: #444; 
+    color: #444;
 }
 
 .half-star::before {
@@ -503,8 +503,9 @@ header p {
     top: 0;
     width: 50%;
     overflow: hidden;
-    color: gold; 
+    color: gold;
 }
+
 .rating-badge {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
@@ -754,7 +755,6 @@ footer p {
     color: #ff2e93;
     transform: scale(1.2);
 }
-
 
 .quiz-trigger-container {
     margin-top: -30px;
@@ -1224,7 +1224,6 @@ footer p {
     text-decoration: underline;
 }
 
-
 .theater-modal-overlay {
     position: fixed;
     top: 0;
@@ -1439,7 +1438,6 @@ footer p {
     letter-spacing: 0.05em;
 }
 
-/* Movie Details Grid inside Modal */
 .theater-details-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
@@ -1650,7 +1648,6 @@ footer p {
     100% { transform: scale(1); }
 }
 
-/* Floating Action Button (FAB) */
 .floating-watchlist-btn {
     position: fixed;
     bottom: 30px;
