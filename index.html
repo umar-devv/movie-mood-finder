@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Mood Finder</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -41,7 +42,7 @@
     <div class="ambient-glow-2"></div>
 
     <div class="container">
-       
+
         <header>
             <span class="portfolio-badge">Umar's Interactive Showcase</span>
             <h1>Movie Mood Finder</h1>
@@ -91,6 +92,7 @@
                 </button>
             </div>
 
+            <div class="search-container">
                 <span class="search-icon">🔍</span>
                 <input type="text" id="movie-search" placeholder="Search masterpieces by title..." aria-label="Search movies by title" autocomplete="off">
                 <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Clear search" style="display: none;">✕</button>
@@ -103,7 +105,7 @@
         </div>
 
         <main class="grid-container" id="movie-grid">
-            <!-- Cards are dynamically injected here via /src/script.js -->
+
         </main>
 
         <div class="another-btn-wrapper" id="another-btn-wrapper" style="display: none;">
@@ -116,8 +118,7 @@
     <div class="quiz-modal-overlay" id="quiz-modal-overlay">
         <div class="quiz-modal" id="quiz-modal">
             <button class="quiz-close-btn" id="close-quiz-btn" aria-label="Close Quiz">&times;</button>
-            
-            <!-- Welcome screen -->
+
             <div id="quiz-welcome-screen" class="quiz-screen active">
                 <div class="quiz-header">
                     <span class="quiz-tag">🔮 Mood Diagnostic</span>
@@ -165,11 +166,13 @@
                 </div>
 
                 <div class="quiz-matched-badges" id="quiz-matched-badges">
+
                 </div>
 
                 <div class="quiz-recommendations-section">
                     <h4>🎬 Recommended Masterpieces for You</h4>
                     <div class="quiz-recs-grid" id="quiz-recs-grid">
+
                     </div>
                 </div>
 
@@ -184,17 +187,19 @@
     <div class="theater-modal-overlay" id="theater-modal-overlay">
         <div class="theater-modal" id="theater-modal">
             <button class="theater-close-btn" id="close-theater-btn" aria-label="Close Theater">&times;</button>
-            
+
             <div class="theater-content">
+
                 <div class="theater-header">
                     <div class="theater-meta">
                         <span class="year-badge" id="theater-year">2014</span>
                         <div class="mood-chips" id="theater-moods">
+
                         </div>
                     </div>
                     <h2 class="theater-title" id="theater-title">Interstellar</h2>
                 </div>
-                
+
                 <div class="theater-screen-container">
                     <div class="theater-screen" id="theater-screen">
                         <div class="cinema-glow" id="cinema-glow"></div>
@@ -212,7 +217,7 @@
                     <div class="details-left">
                         <h3>Cinematic Synopsis</h3>
                         <p class="theater-description" id="theater-description">A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival on a dying Earth.</p>
-                        
+
                         <div class="theater-rating-container">
                             <span class="rating-label">Curator Rating:</span>
                             <span id="theater-rating">★★★★★</span>
@@ -223,6 +228,7 @@
                         <div class="radar-box">
                             <h3>Vibe Profile Bar</h3>
                             <div class="vibe-analytics-list" id="vibe-analytics">
+
                             </div>
                         </div>
                     </div>
@@ -246,7 +252,7 @@
                 <h2><span>🍿</span> Cine-Vault Watchlist</h2>
                 <button class="drawer-close-btn" id="close-drawer-btn" aria-label="Close watchlist">&times;</button>
             </div>
-            
+
             <div class="drawer-body">
                 <div class="watchlist-actions-top">
                     <button type="button" id="watchlist-spin-btn" class="drawer-spin-btn">
@@ -260,8 +266,9 @@
                     <p>Your Cine-Vault is currently empty.</p>
                     <p class="sub-empty">Tap the hearts on movie cards to curate your ultimate watchlist!</p>
                 </div>
-                
+
                 <div class="watchlist-items-list" id="watchlist-items-container">
+
                 </div>
             </div>
         </div>
@@ -297,7 +304,7 @@
                 </svg>
             </a>
         </div>
-        <p>&copy; © 2026. All rights reserved. Designed & Crafted with Passion.</p>
+        <p>&copy;2026. All rights reserved. Designed & Crafted with Passion.</p>
     </footer>
 
     <script src="script.js" defer></script>
