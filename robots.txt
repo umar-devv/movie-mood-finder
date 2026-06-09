@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://themoodmovie.netlify.app/sitemap.xml
