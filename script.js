@@ -757,7 +757,7 @@ var movies = [
     },
     {
         title: "The Goonies",
-        year: 1885, // 1985
+        year: 1885,
         description: "A group of young misfits discover an ancient map and set out on an adventure to find a legendary pirate's long-lost treasure.",
         rating: 5,
         mood: ["Adventure"]
@@ -2427,6 +2427,7 @@ for (var g = 0; g < movies.length; g++) {
     if (movies[g].title === "The Goonies") {
         movies[g].year = 1985;
     }
+
     if (movies[g].mood && movies[g].mood.length > 3) {
         movies[g].mood = movies[g].mood.slice(0, 3);
     }
@@ -2458,10 +2459,10 @@ function shuffleArray(array) {
 
 function generateStarHTML(rating) {
     var starsHTML = "";
-    var roundedRating = Math.round(rating * 2) / 2; 
+    var roundedRating = Math.round(rating * 2) / 2;
     var fullStars = Math.floor(roundedRating);
     var hasHalf = (roundedRating % 1 !== 0);
-    
+
     for (var i = 1; i <= 5; i++) {
         if (i <= fullStars) {
             starsHTML = starsHTML + "★";
@@ -2485,7 +2486,7 @@ function escapeHTML(str) {
 
 function displayMovies(moviesToShow) {
     movieGrid.innerHTML = "";
-    
+
     if (moviesToShow.length === 0) {
         var query = searchInput ? searchInput.value.trim() : "";
         if (currentSelectedMood === "All" && !query) {
@@ -2498,25 +2499,26 @@ function displayMovies(moviesToShow) {
             '</div>';
         return;
     }
-    
+
     var watchlist = getWatchlist();
-    
+
     for (var i = 0; i < moviesToShow.length; i++) {
         var movie = moviesToShow[i];
-        
+
         var chipsHTML = "";
         for (var m = 0; m < movie.mood.length; m++) {
             chipsHTML = chipsHTML + '<span class="mood-chip">' + movie.mood[m] + '</span>';
         }
-        
+
         var isFav = watchlist.indexOf(movie.title) !== -1;
         var favClass = isFav ? "favorite-card-icon active" : "favorite-card-icon";
         var heartSymbol = isFav ? "❤️" : "🤍";
 
         var card = document.createElement("article");
         card.className = "card fade-in";
-        card.style.animationDelay = (Math.min(i, 20) * 0.04) + "s"; 
-        card.innerHTML = 
+        card.style.animationDelay = (Math.min(i, 20) * 0.04) + "s"; // Throttle excessive stagger animation delays for giant grids
+
+        card.innerHTML =
             '<button type="button" class="' + favClass + '" data-title="' + escapeHTML(movie.title) + '" aria-label="Add to watchlist">' + heartSymbol + '</button>' +
             '<div class="card-header">' +
                 '<div class="card-meta">' +
@@ -2530,8 +2532,10 @@ function displayMovies(moviesToShow) {
                 generateStarHTML(movie.rating) +
                 '<button type="button" class="view-details" style="background:none;border:none;color:cyan;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;padding:0;">Details 🔍</button>' +
             '</div>';
-        
+
+        // Attach click triggers securely to prevent nested events clashes
         (function(mObj, cardEl) {
+            // Heart icon click handler
             var heartBtn = cardEl.querySelector(".favorite-card-icon");
             if (heartBtn) {
                 heartBtn.addEventListener("click", function(e) {
@@ -2539,11 +2543,13 @@ function displayMovies(moviesToShow) {
                     toggleFavorite(mObj.title);
                 });
             }
-            
+
+            // Standard card body click opens IMMERSIVE THEATER MODAL
             cardEl.addEventListener("click", function() {
                 openMovieDetailsModal(mObj);
             });
-            
+
+            // Details text button opens IMMERSIVE THEATER MODAL
             var detailsBtn = cardEl.querySelector(".view-details");
             if (detailsBtn) {
                 detailsBtn.addEventListener("click", function(e) {
@@ -2552,7 +2558,7 @@ function displayMovies(moviesToShow) {
                 });
             }
         })(movie, card);
-        
+
         movieGrid.appendChild(card);
     }
 }
@@ -2561,21 +2567,25 @@ function applyFilters(resetIndex) {
     if (resetIndex === undefined) {
         resetIndex = true;
     }
-    
+
+    // Toggle search container visibility based on currentSelectedMood
     if (searchContainer) {
         searchContainer.style.display = currentSelectedMood === "All" ? "flex" : "none";
     }
-    
+
     var searchQuery = searchInput ? searchInput.value.trim().toLowerCase() : "";
-    
+
+    // Toggle clear button visibility dynamically
     if (clearSearchBtn) {
         clearSearchBtn.style.display = searchQuery ? "block" : "none";
     }
-    
+
+    // 1. Gather starting base pool based on currentSelectedMood
     var basePool = [];
     if (currentSelectedMood === "All" || currentSelectedMood === "Random") {
         basePool = movies;
     } else {
+        // Collect movies matching this specific state of mind
         for (var i = 0; i < movies.length; i++) {
             var mMovie = movies[i];
             for (var m = 0; m < mMovie.mood.length; m++) {
@@ -2586,7 +2596,8 @@ function applyFilters(resetIndex) {
             }
         }
     }
-    
+
+    // 2. Filter base pool by search bar real-time match (case-insensitive substring)
     var filteredPool = [];
     if (searchQuery) {
         for (var i = 0; i < basePool.length; i++) {
@@ -2601,14 +2612,15 @@ function applyFilters(resetIndex) {
             filteredPool = basePool;
         }
     }
-    
+
+    // 3. Render and format statuses according to current mood filter rules
     if (currentSelectedMood === "All") {
         moodQueue = [];
         queueIndex = 0;
-        
+
         displayMovies(filteredPool);
         anotherBtnWrapper.style.display = "none";
-        
+
         if (searchQuery) {
             statusText.style.display = "block";
             statusText.innerHTML = "Found " + filteredPool.length + " matching " + (filteredPool.length === 1 ? "masterpiece" : "masterpieces") + " for \"" + searchInput.value.trim() + "\"";
@@ -2617,11 +2629,12 @@ function applyFilters(resetIndex) {
             statusText.innerHTML = "";
         }
     } else {
+
         statusText.style.display = "block";
         if (filteredPool.length === 0) {
             displayMovies([]);
             anotherBtnWrapper.style.display = "none";
-            
+
             if (searchQuery) {
                 if (currentSelectedMood === "Random") {
                     statusText.innerHTML = "No movies match \"" + searchInput.value.trim() + "\"";
@@ -2633,22 +2646,22 @@ function applyFilters(resetIndex) {
             }
             return;
         }
-        
+
         if (resetIndex) {
             moodQueue = shuffleArray(filteredPool);
             queueIndex = 0;
         }
-        
+
         if (queueIndex >= moodQueue.length) {
             queueIndex = 0;
         }
-        
+
         var currentMovie = moodQueue[queueIndex];
         displayMovies([currentMovie]);
-        
+
         statusText.style.display = "none";
         statusText.innerHTML = "";
-        
+
         if (moodQueue.length > 1) {
             anotherBtnWrapper.style.display = "flex";
             if (currentSelectedMood === "Random") {
@@ -2667,6 +2680,7 @@ anotherBtn.addEventListener("click", function() {
         queueIndex++;
         if (queueIndex >= moodQueue.length) {
             queueIndex = 0;
+
             moodQueue = shuffleArray(moodQueue);
         }
         applyFilters(false);
@@ -2675,22 +2689,22 @@ anotherBtn.addEventListener("click", function() {
 
 for (var i = 0; i < moodButtons.length; i++) {
     var button = moodButtons[i];
-    
+
     button.addEventListener("click", function(event) {
         var clickedButton = event.currentTarget;
         var selectedMood = clickedButton.getAttribute("data-mood");
-        
+
         for (var b = 0; b < moodButtons.length; b++) {
             moodButtons[b].classList.remove("active");
         }
-        
+
         clickedButton.classList.add("active");
         currentSelectedMood = selectedMood;
-        
+
         if (searchInput) {
             searchInput.value = "";
         }
-        
+
         applyFilters(true);
     });
 }
@@ -2856,15 +2870,15 @@ function finishQuiz() {
             scorePairs.push({ category: category, score: quizScores[category] });
         }
     }
-    
+
     scorePairs.sort(function(a, b) {
         return b.score - a.score;
     });
-    
+
     var topMood1 = scorePairs[0].category;
     var topMood2 = scorePairs[1].category;
     topMatchedMoods = [topMood1, topMood2];
-    
+
     if (quizMatchedBadges) {
         var emojiMap = {
             "Sad": "😢",
@@ -2877,11 +2891,11 @@ function finishQuiz() {
             "Mystery": "🧩",
             "Horror": "👻"
         };
-        quizMatchedBadges.innerHTML = 
+        quizMatchedBadges.innerHTML =
             '<div class="quiz-match-badge">' + (emojiMap[topMood1] || "🎬") + ' ' + topMood1 + '</div>' +
             '<div class="quiz-match-badge">' + (emojiMap[topMood2] || "🎬") + ' ' + topMood2 + '</div>';
     }
-    
+
     var dualMatches = [];
     var singleMatches = [];
     for (var m = 0; m < movies.length; m++) {
@@ -2894,16 +2908,16 @@ function finishQuiz() {
             singleMatches.push(movie);
         }
     }
-    
+
     var pool = [];
     if (dualMatches.length > 0) {
         pool = shuffleArray(dualMatches).concat(shuffleArray(singleMatches));
     } else {
         pool = shuffleArray(singleMatches);
     }
-    
+
     var recMovies = pool.slice(0, 2);
-    
+
     if (quizRecsGrid) {
         quizRecsGrid.innerHTML = "";
         for (var r = 0; r < recMovies.length; r++) {
@@ -2914,8 +2928,8 @@ function finishQuiz() {
             }
             var cardScore = recMovie.rating;
             var detailsUrl = "https://www.imdb.com/find?q=" + encodeURIComponent(recMovie.title + " " + recMovie.year);
-            
-            var cardHTML = 
+
+            var cardHTML =
                 '<div class="quiz-rec-card">' +
                     '<div class="quiz-rec-header">' +
                         '<h5 class="quiz-rec-title">' + recMovie.title + '</h5>' +
@@ -2933,7 +2947,7 @@ function finishQuiz() {
             quizRecsGrid.innerHTML = quizRecsGrid.innerHTML + cardHTML;
         }
     }
-    
+
     showQuizScreen(quizResultScreen);
 }
 
@@ -3048,9 +3062,9 @@ function updateWatchlistBadge() {
     var list = getWatchlist();
     if (watchlistCountBadge) {
         watchlistCountBadge.textContent = list.length.toString();
-        
+
         watchlistFloatingTrigger.classList.remove("pulse");
-        void watchlistFloatingTrigger.offsetWidth; 
+        void watchlistFloatingTrigger.offsetWidth;
         watchlistFloatingTrigger.classList.add("pulse");
     }
 }
@@ -3059,16 +3073,16 @@ function toggleFavorite(movieTitle) {
     var list = getWatchlist();
     var idx = list.indexOf(movieTitle);
     var added = false;
-    
+
     if (idx !== -1) {
         list.splice(idx, 1);
     } else {
         list.push(movieTitle);
         added = true;
     }
-    
+
     saveWatchlist(list);
-    
+
     var hearts = document.querySelectorAll(".favorite-card-icon");
     for (var h = 0; h < hearts.length; h++) {
         if (hearts[h].getAttribute("data-title") === movieTitle) {
@@ -3081,7 +3095,7 @@ function toggleFavorite(movieTitle) {
             }
         }
     }
-    
+
     var modalTitle = document.getElementById("theater-title");
     if (modalTitle && modalTitle.textContent === movieTitle) {
         var modalFavBtn = document.getElementById("theater-fav-toggle-btn");
@@ -3095,19 +3109,20 @@ function toggleFavorite(movieTitle) {
             }
         }
     }
-    
+
     updateWatchlistUI();
 }
 
 function stopSynthPreview() {
+
 }
 
 var theaterActiveMovie = null;
 
 function openMovieDetailsModal(movie) {
     theaterActiveMovie = movie;
-    stopSynthPreview(); 
-    
+    stopSynthPreview();
+
     var mTitle = document.getElementById("theater-title");
     var mYear = document.getElementById("theater-year");
     var mMoods = document.getElementById("theater-moods");
@@ -3116,7 +3131,7 @@ function openMovieDetailsModal(movie) {
     var mImdbLink = document.getElementById("theater-imdb-link");
     var mFavBtn = document.getElementById("theater-fav-toggle-btn");
     var mVibeList = document.getElementById("vibe-analytics");
-    
+
     if (mTitle) mTitle.textContent = movie.title;
     if (mYear) mYear.textContent = movie.year;
     if (mDesc) mDesc.textContent = movie.description;
@@ -3125,7 +3140,7 @@ function openMovieDetailsModal(movie) {
     if (cinemaBrand) {
         cinemaBrand.textContent = "CINE-VAULT: " + movie.title.toUpperCase();
     }
-    
+
     if (mRating) {
         var starSymbols = "";
         for (var st = 1; st <= 5; st++) {
@@ -3133,14 +3148,14 @@ function openMovieDetailsModal(movie) {
         }
         mRating.innerHTML = '<span style="color: yellow; letter-spacing: 2px;">' + starSymbols + '</span>';
     }
-    
+
     if (mMoods) {
         mMoods.innerHTML = "";
         for (var c = 0; c < movie.mood.length; c++) {
             mMoods.innerHTML += '<span class="mood-chip" style="background: rgba(0, 242, 254, 0.15); border: 1px solid rgba(0, 242, 254, 0.4); color: cyan;">' + movie.mood[c] + '</span>';
         }
     }
-    
+
     var watchlist = getWatchlist();
     var isFav = watchlist.indexOf(movie.title) !== -1;
     if (mFavBtn) {
@@ -3152,22 +3167,22 @@ function openMovieDetailsModal(movie) {
             mFavBtn.innerHTML = "<span>❤️</span> Save to Cine-Vault Watchlist";
         }
     }
-    
+
     if (mImdbLink) {
         mImdbLink.href = "https://www.imdb.com/find?q=" + encodeURIComponent(movie.title + " " + movie.year);
     }
-    
+
     if (mVibeList) {
         mVibeList.innerHTML = "";
         var availableMoods = ["Sad", "Motivational", "Dark", "Mind-blowing", "Adventure", "Romance", "Crime", "Mystery", "Horror"];
-        
+
         for (var v = 0; v < availableMoods.length; v++) {
             var mName = availableMoods[v];
             var isPrimary = movie.mood.indexOf(mName) !== -1;
-            
+
             var targetPercent = isPrimary ? (Math.floor(Math.random() * 14) + 85) : (Math.floor(Math.random() * 24) + 15);
-            
-            var vibeHTML = 
+
+            var vibeHTML =
                 '<div class="vibe-bar-wrapper">' +
                     '<div class="vibe-bar-labels">' +
                         '<span class="vibe-bar-label">' + mName + '</span>' +
@@ -3177,10 +3192,10 @@ function openMovieDetailsModal(movie) {
                         '<div class="vibe-bar-fill" data-width="' + targetPercent + '%"></div>' +
                     '</div>' +
                 '</div>';
-            
+
             mVibeList.innerHTML += vibeHTML;
         }
-        
+
         setTimeout(function() {
             var fills = mVibeList.querySelectorAll(".vibe-bar-fill");
             for (var f = 0; f < fills.length; f++) {
@@ -3188,7 +3203,7 @@ function openMovieDetailsModal(movie) {
             }
         }, 150);
     }
-    
+
     if (theaterOverlay) {
         theaterOverlay.classList.add("active");
         document.body.style.overflow = "hidden";
@@ -3225,20 +3240,20 @@ if (modalSaveBtn) {
 
 function updateWatchlistUI() {
     var watchlist = getWatchlist();
-    
+
     if (watchlist.length === 0) {
         if (drawerEmptyState) drawerEmptyState.style.display = "flex";
         if (watchlistItemsContainer) watchlistItemsContainer.innerHTML = "";
         return;
     }
-    
+
     if (drawerEmptyState) drawerEmptyState.style.display = "none";
     if (watchlistItemsContainer) {
         watchlistItemsContainer.innerHTML = "";
-        
+
         for (var w = 0; w < watchlist.length; w++) {
             var title = watchlist[w];
-            
+
             var foundMovie = null;
             for (var m = 0; m < movies.length; m++) {
                 if (movies[m].title === title) {
@@ -3246,33 +3261,34 @@ function updateWatchlistUI() {
                     break;
                 }
             }
-            
+
             var yearText = foundMovie ? foundMovie.year : "Cinematic";
             var itemHTML = document.createElement("div");
             itemHTML.className = "watchlist-item-card";
             itemHTML.setAttribute("data-title", title);
-            
-            itemHTML.innerHTML = 
+
+            itemHTML.innerHTML =
                 '<div class="witem-details">' +
                     '<div class="witem-title">' + title + '</div>' +
                     '<span class="witem-year">📅 ' + yearText + '</span>' +
                 '</div>' +
                 '<button type="button" class="witem-remove-btn" title="Remove masterpiece">&times;</button>';
-            
+
             (function(itemEl, tStr, mObj) {
+
                 itemEl.querySelector(".witem-title").addEventListener("click", function() {
                     closeWatchlistDrawer();
                     if (mObj) {
                         openMovieDetailsModal(mObj);
                     }
                 });
-                
+
                 itemEl.querySelector(".witem-remove-btn").addEventListener("click", function(e) {
                     e.stopPropagation();
                     toggleFavorite(tStr);
                 });
             })(itemHTML, title, foundMovie);
-            
+
             watchlistItemsContainer.appendChild(itemHTML);
         }
     }
@@ -3312,20 +3328,20 @@ if (watchlistClearAllBtn) {
     watchlistClearAllBtn.addEventListener("click", function() {
         var list = getWatchlist();
         if (list.length === 0) {
-            return; 
+            return;
         }
 
         if (watchlistClearAllBtn.classList.contains("confirming")) {
             saveWatchlist([]);
-            
+
             var hearts = document.querySelectorAll(".favorite-card-icon");
             for (var h = 0; h < hearts.length; h++) {
                 hearts[h].classList.remove("active");
                 hearts[h].innerHTML = "🤍";
             }
-            
+
             updateWatchlistUI();
-            
+
             watchlistClearAllBtn.classList.remove("confirming");
             watchlistClearAllBtn.textContent = "Clear All";
             if (clearConfirmTimeout) {
@@ -3333,18 +3349,19 @@ if (watchlistClearAllBtn) {
                 clearConfirmTimeout = null;
             }
         } else {
+
             watchlistClearAllBtn.classList.add("confirming");
             watchlistClearAllBtn.textContent = "Confirm? ⚠️";
-            
+
             if (clearConfirmTimeout) {
                 clearTimeout(clearConfirmTimeout);
             }
-            
+
             clearConfirmTimeout = setTimeout(function() {
                 watchlistClearAllBtn.classList.remove("confirming");
                 watchlistClearAllBtn.textContent = "Clear All";
                 clearConfirmTimeout = null;
-            }, 3000); 
+            }, 3000);
         }
     });
 }
@@ -3358,40 +3375,43 @@ if (watchlistSpinBtn) {
             alert("Raffle Wheel requires at least 1 movie inside your Cine-Vault! Add masterpieces first.");
             return;
         }
-        if (spinRaffleTimer) return; 
-        
+        if (spinRaffleTimer) return;
+
         var cards = watchlistItemsContainer.querySelectorAll(".watchlist-item-card");
         if (cards.length === 0) return;
-        
+
         watchlistSpinBtn.disabled = true;
         watchlistSpinBtn.innerHTML = "<span>🎲</span> Raffling Cine-Vault...";
-        
-        var steps = 18; 
-        var speedIndex = 70; 
+
+        var steps = 18;
+        var speedIndex = 70;
         var activeStep = 0;
         var currentHighlightIdx = -1;
-        
+
         function selectRaffleStep() {
+
             if (currentHighlightIdx !== -1 && cards[currentHighlightIdx]) {
                 cards[currentHighlightIdx].style.borderColor = "";
                 cards[currentHighlightIdx].style.boxShadow = "";
                 cards[currentHighlightIdx].style.background = "";
             }
-            
+
             currentHighlightIdx = (currentHighlightIdx + 1) % cards.length;
             var targetEl = cards[currentHighlightIdx];
-            
+
             if (targetEl) {
                 targetEl.style.borderColor = "cyan";
                 targetEl.style.boxShadow = "0 0 15px rgba(0,242,254,0.5)";
                 targetEl.style.background = "rgba(0, 242, 254, 0.1)";
             }
-            
+
             activeStep++;
             if (activeStep < steps) {
-                speedIndex = speedIndex + (activeStep * 5); 
+
+                speedIndex = speedIndex + (activeStep * 5);
                 spinRaffleTimer = setTimeout(selectRaffleStep, speedIndex);
             } else {
+
                 var chosenTitle = list[currentHighlightIdx];
                 var foundMovieObj = null;
                 for (var m = 0; m < movies.length; m++) {
@@ -3400,28 +3420,28 @@ if (watchlistSpinBtn) {
                         break;
                     }
                 }
-                
+
                 if (targetEl) {
                     targetEl.style.borderColor = "magenta";
                     targetEl.style.boxShadow = "0 0 25px rgba(255, 0, 128, 0.8)";
                     targetEl.style.background = "rgba(255, 0, 128, 0.15)";
                     targetEl.style.transform = "scale(1.05)";
-                    
+
                     setTimeout(function() {
                         targetEl.style.transform = "";
                     }, 500);
                 }
-                
+
                 setTimeout(function() {
                     closeWatchlistDrawer();
                     if (foundMovieObj) {
                         openMovieDetailsModal(foundMovieObj);
                     }
-                    
+
                     watchlistSpinBtn.disabled = false;
                     watchlistSpinBtn.innerHTML = "<span>🔮</span> Spin Cine-Wheel";
                     spinRaffleTimer = null;
-                    
+
                     if (targetEl) {
                         targetEl.style.borderColor = "";
                         targetEl.style.boxShadow = "";
@@ -3430,7 +3450,7 @@ if (watchlistSpinBtn) {
                 }, 900);
             }
         }
-        
+
         selectRaffleStep();
     });
 }
@@ -3452,20 +3472,20 @@ updateWatchlistBadge();
 
     function applyAppTheme(themeName) {
         if (!themeLabels[themeName]) return;
-        
+
         Object.keys(themeLabels).forEach(function(themeKey) {
             document.body.classList.remove("theme-" + themeKey);
         });
-        
+
         document.body.classList.add("theme-" + themeName);
-        
+
         if (themeToggleBtn) {
             var emojiEl = themeToggleBtn.querySelector(".theme-btn-emoji");
             var textEl = themeToggleBtn.querySelector(".theme-btn-text");
             if (emojiEl) emojiEl.textContent = themeLabels[themeName].emoji;
             if (textEl) textEl.textContent = themeLabels[themeName].text;
         }
-        
+
         themeOptBtns.forEach(function(btn) {
             var btnTheme = btn.getAttribute("data-theme");
             if (btnTheme === themeName) {
@@ -3474,11 +3494,12 @@ updateWatchlistBadge();
                 btn.classList.remove("active");
             }
         });
-        
+
         localStorage.setItem("selected-theme", themeName);
     }
 
     if (themeToggleBtn && themeDropdownMenu) {
+
         themeToggleBtn.addEventListener("click", function(e) {
             e.stopPropagation();
             themeDropdownMenu.classList.toggle("open");
@@ -3503,4 +3524,3 @@ updateWatchlistBadge();
     var savedTheme = localStorage.getItem("selected-theme") || "cosmic";
     applyAppTheme(savedTheme);
 })();
-
