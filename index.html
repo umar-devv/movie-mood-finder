@@ -3,29 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Mood Finder</title>
-
+    <title>Movie Mood Finder - Umar's Cinematic Vault</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-       <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div class="theme-toggle-container" id="theme-toggle-container">
+        <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" title="Choose App Theme">
+            <span class="theme-btn-emoji">🔮</span>
+            <span class="theme-btn-text">Cosmic Neon</span>
+            <span class="theme-btn-caret">▾</span>
+        </button>
+        <div class="theme-dropdown-menu" id="theme-dropdown-menu">
+            <button class="theme-opt-btn active" data-theme="cosmic" style="--theme-picker-color: #d946ef;">
+                <span class="theme-dot"></span> Cosmic Neon
+            </button>
+            <button class="theme-opt-btn" data-theme="emerald" style="--theme-picker-color: #10b981;">
+                <span class="theme-dot"></span> Emerald Mint
+            </button>
+            <button class="theme-opt-btn" data-theme="sunset" style="--theme-picker-color: #f59e0b;">
+                <span class="theme-dot"></span> Sunset Crimson
+            </button>
+            <button class="theme-opt-btn" data-theme="nord" style="--theme-picker-color: #38bdf8;">
+                <span class="theme-dot"></span> Nordic Frost
+            </button>
+            <button class="theme-opt-btn" data-theme="cyberpunk" style="--theme-picker-color: #ff007f;">
+                <span class="theme-dot"></span> Cyberpunk Dream
+            </button>
+        </div>
+    </div>
 
     <div class="ambient-glow-1"></div>
     <div class="ambient-glow-2"></div>
 
     <div class="container">
+       
         <header>
             <span class="portfolio-badge">Umar's Interactive Showcase</span>
             <h1>Movie Mood Finder</h1>
             <p>Select your current state of mind and let the system recommend your next unforgettable cinematic journey.</p>
         </header>
 
+        <div class="quiz-trigger-container">
+            <button type="button" id="open-quiz-btn" class="quiz-trigger-btn">
+                <span>🔮</span> I Don't Know How I Feel
+            </button>
+        </div>
+
         <div class="controls-wrapper">
             <div class="mood-selector" id="mood-selector" role="group" aria-label="Filter movies by mood">
                 <button class="mood-btn active reset-btn" data-mood="All">
-                    <span>✨</span> Show All
+                    <span>🔍</span> Search
                 </button>
                 <button class="mood-btn" data-mood="Sad">
                     <span>😢</span> Sad
@@ -39,15 +71,233 @@
                 <button class="mood-btn" data-mood="Mind-blowing">
                     <span>🧠</span> Mind-blowing
                 </button>
+                <button class="mood-btn" data-mood="Adventure">
+                    <span>🧭</span> Adventure
+                </button>
+                <button class="mood-btn" data-mood="Romance">
+                    <span>💖</span> Romance
+                </button>
+                <button class="mood-btn" data-mood="Crime">
+                    <span>🕵️‍♂️</span> Crime
+                </button>
+                <button class="mood-btn" data-mood="Mystery">
+                    <span>🧩</span> Mystery
+                </button>
+                <button class="mood-btn" data-mood="Horror">
+                    <span>👻</span> Horror
+                </button>
+                <button class="mood-btn" data-mood="Random" id="random-btn">
+                    <span>🎲</span> Pick Random
+                </button>
             </div>
+
+                <span class="search-icon">🔍</span>
+                <input type="text" id="movie-search" placeholder="Search masterpieces by title..." aria-label="Search movies by title" autocomplete="off">
+                <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Clear search" style="display: none;">✕</button>
+            </div>
+
             <div class="status-bar" id="status-bar">
+                Showing all 130 curated masterpieces
             </div>
+
         </div>
-        <main class="grid-container" id="movie-grid"></main>
+
+        <main class="grid-container" id="movie-grid">
+            <!-- Cards are dynamically injected here via /src/script.js -->
+        </main>
+
+        <div class="another-btn-wrapper" id="another-btn-wrapper" style="display: none;">
+            <button class="another-action-btn" id="another-btn">
+                <span>🎲</span> Show Another
+            </button>
+        </div>
     </div>
 
+    <div class="quiz-modal-overlay" id="quiz-modal-overlay">
+        <div class="quiz-modal" id="quiz-modal">
+            <button class="quiz-close-btn" id="close-quiz-btn" aria-label="Close Quiz">&times;</button>
+            
+            <!-- Welcome screen -->
+            <div id="quiz-welcome-screen" class="quiz-screen active">
+                <div class="quiz-header">
+                    <span class="quiz-tag">🔮 Mood Diagnostic</span>
+                    <h2>Can't Choose a Mood?</h2>
+                    <p>Let's find the absolute best film for your current state of mind. Answer 8 quick questions and our interactive quiz will decode your exact cinematic vibes.</p>
+                </div>
+                <div class="quiz-welcome-art">
+                    <span>🎭</span><span>🍿</span><span>🎬</span>
+                </div>
+                <button type="button" id="start-quiz-btn" class="quiz-action-btn">Start Vibe Check</button>
+            </div>
+
+            <div id="quiz-question-screen" class="quiz-screen">
+                <div class="quiz-progress-wrapper">
+                    <div class="quiz-progress-text">Question <span id="quiz-current-num">1</span> of 8</div>
+                    <div class="quiz-progress-track">
+                        <div id="quiz-progress-fill" class="quiz-progress-fill" style="width: 12.5%;"></div>
+                    </div>
+                </div>
+                <div class="quiz-question-container">
+                    <div class="quiz-category-indicator" id="quiz-question-category">Sad</div>
+                    <h3 class="quiz-question-text" id="quiz-question-text">Are you ready to shed a tear for a powerful, deep story?</h3>
+                </div>
+                <div class="quiz-options-grid">
+                    <button type="button" class="quiz-opt-btn" data-value="2">
+                        <span class="opt-emoji">✔️</span>
+                        <div class="opt-label">Yes, absolutely</div>
+                    </button>
+                    <button type="button" class="quiz-opt-btn" data-value="1">
+                        <span class="opt-emoji">🌀</span>
+                        <div class="opt-label">Maybe / Kind of</div>
+                    </button>
+                    <button type="button" class="quiz-opt-btn" data-value="0">
+                        <span class="opt-emoji">❌</span>
+                        <div class="opt-label">Not really</div>
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-result-screen" class="quiz-screen">
+                <div class="quiz-header">
+                    <span class="quiz-tag">🎯 Diagnosis Complete</span>
+                    <h2>Your Cinematic Aura</h2>
+                    <p>Based on your answers, we've decoded your top 2 matched movie moods:</p>
+                </div>
+
+                <div class="quiz-matched-badges" id="quiz-matched-badges">
+                </div>
+
+                <div class="quiz-recommendations-section">
+                    <h4>🎬 Recommended Masterpieces for You</h4>
+                    <div class="quiz-recs-grid" id="quiz-recs-grid">
+                    </div>
+                </div>
+
+                <div class="quiz-footer-buttons">
+                    <button type="button" id="quiz-apply-btn" class="quiz-action-btn">Apply Mood Filters</button>
+                    <button type="button" id="quiz-restart-btn" class="quiz-secondary-btn">Retake Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="theater-modal-overlay" id="theater-modal-overlay">
+        <div class="theater-modal" id="theater-modal">
+            <button class="theater-close-btn" id="close-theater-btn" aria-label="Close Theater">&times;</button>
+            
+            <div class="theater-content">
+                <div class="theater-header">
+                    <div class="theater-meta">
+                        <span class="year-badge" id="theater-year">2014</span>
+                        <div class="mood-chips" id="theater-moods">
+                        </div>
+                    </div>
+                    <h2 class="theater-title" id="theater-title">Interstellar</h2>
+                </div>
+                
+                <div class="theater-screen-container">
+                    <div class="theater-screen" id="theater-screen">
+                        <div class="cinema-glow" id="cinema-glow"></div>
+                        <div class="theater-player-content">
+                            <div class="cinema-branding">
+                                <span class="cinema-emoji">🎬</span>
+                                <h4 id="cinema-screen-brand" class="cinema-screen-brand">CINE-VAULT PROJECTION</h4>
+                                <span class="cinema-tagline">IMMERSIVE MOOD AMBIENCE &bull; ULTRA HD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theater-details-grid">
+                    <div class="details-left">
+                        <h3>Cinematic Synopsis</h3>
+                        <p class="theater-description" id="theater-description">A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival on a dying Earth.</p>
+                        
+                        <div class="theater-rating-container">
+                            <span class="rating-label">Curator Rating:</span>
+                            <span id="theater-rating">★★★★★</span>
+                        </div>
+                    </div>
+
+                    <div class="details-right">
+                        <div class="radar-box">
+                            <h3>Vibe Profile Bar</h3>
+                            <div class="vibe-analytics-list" id="vibe-analytics">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theater-actions">
+                    <button type="button" class="theater-main-btn" id="theater-fav-toggle-btn">
+                        <span>❤️</span> Save to Cine-Vault Watchlist
+                    </button>
+                    <a id="theater-imdb-link" href="#" target="_blank" rel="noopener noreferrer" class="theater-sec-btn">
+                        Search IMDb ↗
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="drawer-overlay" id="drawer-overlay">
+        <div class="watchlist-drawer" id="watchlist-drawer">
+            <div class="drawer-header">
+                <h2><span>🍿</span> Cine-Vault Watchlist</h2>
+                <button class="drawer-close-btn" id="close-drawer-btn" aria-label="Close watchlist">&times;</button>
+            </div>
+            
+            <div class="drawer-body">
+                <div class="watchlist-actions-top">
+                    <button type="button" id="watchlist-spin-btn" class="drawer-spin-btn">
+                        <span>🔮</span> Spin Cine-Wheel
+                    </button>
+                    <button type="button" id="watchlist-clear-all" class="drawer-clear-btn">Clear All</button>
+                </div>
+
+                <div id="drawer-empty-state" class="drawer-empty">
+                    <span class="drawer-empty-art">💔</span>
+                    <p>Your Cine-Vault is currently empty.</p>
+                    <p class="sub-empty">Tap the hearts on movie cards to curate your ultimate watchlist!</p>
+                </div>
+                
+                <div class="watchlist-items-list" id="watchlist-items-container">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" id="watchlist-floating-trigger" class="floating-watchlist-btn" title="Open My Cine-Vault Watchlist">
+        <span class="fw-emoji">🍿</span>
+        <span class="fw-count" id="watchlist-count-badge">0</span>
+    </button>
+
     <footer>
-        &copy; 2026 Umar. Designed & Crafted with Passion. All rights reserved.
+        <div class="social-links">
+            <a href="https://github.com/umar-devv" target="_blank" rel="noopener noreferrer" class="social-icon" title="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.58 0-.287-.01-1.05-.015-2.06-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.082-.73.082-.73 1.205.085 1.838 1.237 1.838 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.235-3.22-.123-.3-.535-1.52.117-3.16 0 0 1.008-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.29-1.552 3.297-1.23 3.297-1.23.653 1.64.24 2.86.118 3.16.768.84 1.233 1.91 1.233 3.22 0 4.61-2.804 5.62-5.476 5.92.43.37.824 1.102.824 2.22 0 1.602-.015 2.894-.015 3.287 0 .32.216.694.825.576C20.565 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/muhammad-umar-afzal-459a05282" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.771-.773 1.771-1.729V1.729C24 .774 23.205 0 22.225 0z"/>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/mumar_.07?igsh=bndnbzYyYWZxOWhr" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.31.975.975 1.248 2.242 1.31 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.335 2.633-1.31 3.608-.975.975-2.242 1.248-3.608 1.31-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.335-3.608-1.31-.975-.975-1.248-2.242-1.31-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.335-2.633 1.31-3.608.975-.975 2.242-1.248 3.608-1.31 1.266-.058 1.646-.07 4.85-.07M12 0C8.741 0 8.332.014 7.052.072c-1.95.089-3.663.567-5.038 1.942C1.639 3.389 1.161 5.102 1.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.089 1.95.567 3.663 1.942 5.038 1.375 1.375 3.088 1.853 5.038 1.942 1.28.058 1.689.072 4.948.072s3.668-.014 4.948-.072c1.95-.089 3.663-.567 5.038-1.942 1.375-1.375 1.853-3.088 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.089-1.95-.567-3.663-1.942-5.038-1.375-1.375-3.088-1.853-5.038-1.942C15.668.014 15.259 0 12 0z"/>
+                    <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8z"/>
+                    <circle cx="18.406" cy="5.594" r="1.44"/>
+                </svg>
+            </a>
+            <a href="https://www.facebook.com/mumar.gacha" target="_blank" rel="noopener noreferrer" class="social-icon" title="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+        </div>
+        <p>&copy; © 2026. All rights reserved. Designed & Crafted with Passion.</p>
     </footer>
 
     <script src="script.js" defer></script>
