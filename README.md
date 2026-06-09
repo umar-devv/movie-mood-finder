@@ -56,6 +56,8 @@ Stop scrolling endlessly and let your emotions guide you to your next cinematic 
 
 ## 📸 Preview
 <img width="1473" height="705" alt="image" src="https://github.com/user-attachments/assets/dd0ae7c6-8247-4b41-8f4c-31097f010c00" />
+<img width="1000" height="707" alt="image" src="https://github.com/user-attachments/assets/0d908921-4c13-4f77-b5a9-d4aa0af4a6c7" />
+
 
 ---
 
