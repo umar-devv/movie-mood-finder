@@ -1,5 +1,3 @@
-# Complete README.md - With File Descriptions Added
-
 # 🎬 Movie Mood Finder
 
 [![Netlify Status](https://img.shields.io/badge/deployed-on%20netlify-00b5b5)](https://themoodmovie.netlify.app/)
