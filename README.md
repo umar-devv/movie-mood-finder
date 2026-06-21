@@ -1,6 +1,6 @@
 # 🎬 Movie Mood Finder
 
-[![Netlify Status](https://img.shields.io/badge/deployed-on%20netlify-00b5b5)](https://themoodmovie.netlify.app/)
+[![Vercel Status](https://img.shields.io/badge/deployed-on%20vercel-000000)](https://themoodmovie.vercel.app/)
 [![Made with](https://img.shields.io/badge/made%20with-HTML%20%7C%20CSS%20%7C%20JS-f5f5f5)]()
 <img width="1487" height="723" alt="Screenshot 2026-06-21 143952" src="https://github.com/user-attachments/assets/1f4fb0bf-be4c-4d87-9d78-0125f00cd1d2" />
 
@@ -10,7 +10,7 @@
 
 ## 🌟 Live Demo
 
-**👉 [themoodmovie.netlify.app](https://themoodmovie.netlify.app/)**
+**👉 [themoodmovie.vercel.app](https://themoodmovie.vercel.app/)**
 
 ---
 
@@ -42,7 +42,7 @@ A minimalist movie recommendation tool that helps you discover films based on yo
 | **HTML5** | Semantic structure |
 | **CSS3** | Styling, animations, responsive grid |
 | **JavaScript** | Mood filtering logic |
-| **Netlify** | Hosting & deployment |
+| **Vercel** | Hosting & deployment |
 
 ---
 
@@ -57,7 +57,7 @@ A minimalist movie recommendation tool that helps you discover films based on yo
 
 ## 🧪 Test It Yourself
 
-👉 **[themoodmovie.netlify.app](https://themoodmovie.netlify.app/)**
+👉 **[themoodmovie.vercel.app](https://themoodmovie.vercel.app/)**
 
 No installation needed. Just open in any browser.
 
