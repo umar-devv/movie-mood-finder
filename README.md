@@ -1,14 +1,12 @@
-
 # 🎬 Movie Mood Finder
 
 [![Netlify Status](https://img.shields.io/badge/deployed-on%20netlify-00b5b5)](https://themoodmovie.netlify.app/)
 [![Made with](https://img.shields.io/badge/made%20with-HTML%20%7C%20CSS%20%7C%20JS-f5f5f5)]()
-
-![Movie Mood Finder Preview](https://github.com/user-attachments/assets/9cc83b4b-f687-46c6-abde-4b477ea21b17)
+<img width="1487" height="723" alt="Screenshot 2026-06-21 143952" src="https://github.com/user-attachments/assets/1f4fb0bf-be4c-4d87-9d78-0125f00cd1d2" />
 
 > **Find your perfect movie based on how you feel right now.**
 
----
+
 
 ## 🌟 Live Demo
 
@@ -33,6 +31,7 @@ A minimalist movie recommendation tool that helps you discover films based on yo
 | 📱 **Fully Responsive** | Works on mobile, tablet, and desktop |
 | 🚀 **Fast & Lightweight** | Pure HTML + CSS + JavaScript, no frameworks |
 | 🔗 **IMDb Ready** | "Details" link for each movie |
+| 🌐 **Social Links** | GitHub, LinkedIn, Instagram, Facebook in footer |
 
 ---
 
@@ -56,30 +55,11 @@ A minimalist movie recommendation tool that helps you discover films based on yo
 
 ---
 
-
-## 📸 Screenshots
-
-### Desktop View
-![Desktop Preview](https://github.com/user-attachments/assets/dd0ae7c6-8247-4b41-8f4c-31097f010c00)
-
-### Mobile View
-![Mobile Preview](https://github.com/user-attachments/assets/0d908921-4c13-4f77-b5a9-d4aa0af4a6c7)
-
----
-
-## 🚀 Deployment
-
-This site is deployed on **Netlify** with automatic builds from this GitHub repository.
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/umar-devv/movie-mood-finder)
-
----
-
 ## 🧪 Test It Yourself
 
 👉 **[themoodmovie.netlify.app](https://themoodmovie.netlify.app/)**
 
-No installation needed. Just open in any modern browser.
+No installation needed. Just open in any browser.
 
 ---
 
@@ -87,12 +67,12 @@ No installation needed. Just open in any modern browser.
 
 | Mood | Movies |
 |------|--------|
-| **Sad** | The Pursuit of Happyness, Interstellar, Requiem for a Dream, The Shawshank Redemption |
-| **Motivational** | The Pursuit of Happyness, The Shawshank Redemption |
-| **Dark** | The Dark Knight, Inception, Requiem for a Dream, The Prestige, Fight Club, The Godfather |
-| **Mind-blowing** | The Dark Knight, Interstellar, Inception, The Prestige, Fight Club |
+| **Sad** | The Pursuit of Happyness, Interstellar, Requiem for a Dream, The Shawshank Redemption, Good Will Hunting, The Green Mile, The Truman Show |
+| **Motivational** | The Pursuit of Happyness, The Shawshank Redemption, Good Will Hunting, The Social Network, Rocky, The Green Mile, Whiplash |
+| **Dark** | The Dark Knight, Inception, Requiem for a Dream, The Prestige, Fight Club, The Godfather, The Matrix, Se7en, Memento, Shutter Island, Whiplash |
+| **Mind-blowing** | The Dark Knight, Interstellar, Inception, The Prestige, Fight Club, The Matrix, The Social Network, Memento, Shutter Island, The Truman Show |
 
-*Total: 9 curated movies | More to be added!*
+*Total: 19 curated movies | More to be added!*
 
 ---
 
