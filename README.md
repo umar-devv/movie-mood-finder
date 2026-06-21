@@ -1,10 +1,18 @@
+Here's your **complete README.md** in one file to copy and paste directly into GitHub:
+
+---
+
+```markdown
 # 🎬 Movie Mood Finder
 
 [![Netlify Status](https://img.shields.io/badge/deployed-on%20netlify-00b5b5)](https://themoodmovie.netlify.app/)
 [![Made with](https://img.shields.io/badge/made%20with-HTML%20%7C%20CSS%20%7C%20JS-f5f5f5)]()
-<img width="1473" height="705" alt="image" src="https://github.com/user-attachments/assets/9cc83b4b-f687-46c6-abde-4b477ea21b17" />
 
-> Find your perfect movie based on how you feel right now.
+![Movie Mood Finder Preview](https://github.com/user-attachments/assets/9cc83b4b-f687-46c6-abde-4b477ea21b17)
+
+> **Find your perfect movie based on how you feel right now.**
+
+---
 
 ## 🌟 Live Demo
 
@@ -14,62 +22,70 @@
 
 ## 🎭 What is Movie Mood Finder?
 
-A movie recommendation website that helps you discover films based on your current mood.  
-Stop scrolling endlessly and let your emotions guide you to your next cinematic experience.
+A minimalist movie recommendation tool that helps you discover films based on your current emotional state. Stop endless scrolling — let your mood guide you to your next cinematic experience.
 
 ---
 
-## 🎯 Features
+## ✨ Features
 
 | Feature | Description |
 |---------|-------------|
-| 🎭 **8 Mood Categories** | Sad, Motivational, Dark, Mind-blowing, Adventure, Romance, Crime, Mystery |
-| 🎲 **Random Movie** | Can't decide? Let fate choose for you |
-| 🔄 **Show Another** | Cycle through movies in your selected mood |
-| 🔍 **Search** | Find any movie by title instantly |
-| ⭐ **Rating System** | Full and half-star ratings (1-5) |
-| 🤷 **Mood Quiz** | "I Don't Know How I Feel" - answer 8 questions, get personalized recommendations |
-| 🎨 **Theme Switcher** | 5 color themes (Cosmic, Emerald, Sunset, Nord, Cyberpunk) |
-| ❤️ **Watchlist** | Save your favorite movies |
-| 📱 **Responsive** | Works perfectly on mobile, tablet, and desktop |
-| 🔗 **IMDb Search** | One-click link to IMDb for each movie |
-
----
-
-## 📊 Current Stats
-
-- 🎬 **300+ Movies** and growing
-- 🎭 **9 Mood Categories**
-- ⭐ **Ratings from 1 to 5 stars** (including half-stars)
-- 🎨 **5 Color Themes**
+| 🎭 **4 Mood Filters** | Sad, Motivational, Dark, Mind-blowing |
+| ✨ **Show All** | View the complete movie collection |
+| ⭐ **Rating System** | 1-5 star ratings for each film |
+| 🎨 **Visual Design** | Cyberpunk neon aesthetic with ambient glow effects |
+| 📱 **Fully Responsive** | Works on mobile, tablet, and desktop |
+| 🚀 **Fast & Lightweight** | Pure HTML + CSS + JavaScript, no frameworks |
+| 🔗 **IMDb Ready** | "Details" link for each movie |
 
 ---
 
 ## 🛠️ Built With
 
-- **HTML5** - Structure
-- **CSS3** - Styling, animations, responsive design
-- **JavaScript** - Filtering, quiz logic, watchlist, theme switcher
-- **Netlify** - Hosting and deployment
-
----
-
-## 📸 Preview
-<img width="1473" height="705" alt="image" src="https://github.com/user-attachments/assets/dd0ae7c6-8247-4b41-8f4c-31097f010c00" />
-<img width="1000" height="707" alt="image" src="https://github.com/user-attachments/assets/0d908921-4c13-4f77-b5a9-d4aa0af4a6c7" />
-
+| Technology | Purpose |
+|------------|---------|
+| **HTML5** | Semantic structure |
+| **CSS3** | Styling, animations, responsive grid |
+| **JavaScript** | Mood filtering logic |
+| **Netlify** | Hosting & deployment |
 
 ---
 
 ## 🎮 How to Use
 
-1. **Filter by Mood** - Click any mood button to see matching movies
-2. **Search** - Type a movie title to find it instantly
-3. **Random** - Click 🎲 for a surprise recommendation
-4. **Show Another** - Cycle through more movies in the same mood
-5. **Mood Quiz** - Click "I Don't Know How I Feel" for personalized picks
-6. **Watchlist** - Click the heart icon to save movies
-7. **Theme** - Change colors using the palette icon in top-left
+1. **Filter by Mood** — Click any mood button (Sad, Motivational, Dark, Mind-blowing)
+2. **Show All** — Click "Show All" to see the complete collection
+3. **Browse** — Each movie card shows title, year, description, rating, and mood tags
+4. **View Details** — Click "Details ↗" to explore more about the movie
+
+---
+
+## 🗂️ File Structure
+
+```
+movie-mood-finder/
+├── index.html      # Main HTML structure
+├── style.css       # Cyberpunk styling & animations
+└── script.js       # Mood filtering logic & movie data
+```
+
+---
+
+## 📸 Screenshots
+
+### Desktop View
+![Desktop Preview](https://github.com/user-attachments/assets/dd0ae7c6-8247-4b41-8f4c-31097f010c00)
+
+### Mobile View
+![Mobile Preview](https://github.com/user-attachments/assets/0d908921-4c13-4f77-b5a9-d4aa0af4a6c7)
+
+---
+
+## 🚀 Deployment
+
+This site is deployed on **Netlify** with automatic builds from this GitHub repository.
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/umar-devv/movie-mood-finder)
 
 ---
 
@@ -81,12 +97,25 @@ No installation needed. Just open in any modern browser.
 
 ---
 
+## 📊 Current Movie Database
+
+| Mood | Movies |
+|------|--------|
+| **Sad** | The Pursuit of Happyness, Interstellar, Requiem for a Dream, The Shawshank Redemption |
+| **Motivational** | The Pursuit of Happyness, The Shawshank Redemption |
+| **Dark** | The Dark Knight, Inception, Requiem for a Dream, The Prestige, Fight Club, The Godfather |
+| **Mind-blowing** | The Dark Knight, Interstellar, Inception, The Prestige, Fight Club |
+
+*Total: 9 curated movies | More to be added!*
+
+---
+
 ## 👨‍💻 Author
 
 **Muhammad Umar Afzal**
 
-- GitHub: (https://github.com/umar-devv)
-- LinkedIn: (https://www.linkedin.com/in/muhammad-umar-afzal-459a05282)
+- GitHub: [umar-devv](https://github.com/umar-devv)
+- LinkedIn: [Muhammad Umar Afzal](https://www.linkedin.com/in/muhammad-umar-afzal-459a05282)
 
 ---
 
