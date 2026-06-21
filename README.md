@@ -1,8 +1,4 @@
-Here's your **complete README.md** in one file to copy and paste directly into GitHub:
 
----
-
-```markdown
 # 🎬 Movie Mood Finder
 
 [![Netlify Status](https://img.shields.io/badge/deployed-on%20netlify-00b5b5)](https://themoodmovie.netlify.app/)
@@ -60,16 +56,6 @@ A minimalist movie recommendation tool that helps you discover films based on yo
 
 ---
 
-## 🗂️ File Structure
-
-```
-movie-mood-finder/
-├── index.html      # Main HTML structure
-├── style.css       # Cyberpunk styling & animations
-└── script.js       # Mood filtering logic & movie data
-```
-
----
 
 ## 📸 Screenshots
 
